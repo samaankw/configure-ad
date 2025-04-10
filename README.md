@@ -54,7 +54,7 @@ Click Review + Create > Create</P>
 
 <img src="https://i.imgur.com/4dinb1N.jpeg" height="80%" width="80%">
 
--- To ensure DC-1 always has the same internal IP address, set its Virtual Network Interface Card (vNIC) to use a static private IP:
+- To ensure DC-1 always has the same internal IP address, set its Virtual Network Interface Card (vNIC) to use a static private IP:
 
 Go to DC-1’s page in the Azure portal
 
@@ -228,7 +228,7 @@ Now, log out of DC-1 as labuser and log back in using the username mydomain.com\
 <img src="https://i.imgur.com/Q6rolyR.jpeg" height="80%" width="80%">
 
 <H2> Step 5: Join Client-1 to your domain (mydomain.com)</H2>
-<p>n the Azure portal:
+<p> In the Azure portal:
 
 Go back to the Client-1 Virtual Machine.
 
@@ -261,7 +261,7 @@ Under Member of, select Domain.
 
 In the Domain field, type mydomain.com and click OK.
 
-When prompted, enter the Username as mydomain.com\jane_admin and enter the password.
+When prompted, you can just go ahead and enter the Username as mydomain.com\jane_admin and enter the password.
 
 Click OK, then restart the computer for the changes to take effect.
 
@@ -270,5 +270,71 @@ This will join Client-1 to the domain as part of mydomain.com.</p>
 <img src="https://i.imgur.com/grHryu3.jpeg" height="80%" width="80%">
 
 <img src= "https://i.imgur.com/DW23ZHW.jpeg"   height="80%" width="80%">
+<H2>  Step 6: Setup Remote Desktop for Non-Administrative Users on Client-1 </H2>
+<p>Log back into Client-1 using the domain credentials: mydomain.com\jane_admin.
+
+Right-click the Start menu and select System.
+
+On the right-hand side, click Remote Desktop.
+
+Under User Accounts, click "Select users that can remotely access this PC".
+
+In the new window, click Add.
+
+Type in the name(s) of the domain user(s) you want to allow remote access.
+
+Click Check Names to validate the entries, then click OK twice to confirm.
+
+This adds the specified domain users to the list of those allowed to remotely access Client-1. </p>
+
+<img src="https://i.imgur.com/grHryu3.jpeg" height="80%" width="80%">
+
+<img src="https://i.imgur.com/U05FhtK.jpeg"   height="80%" width="80%">
+
+<h2> Step 7: Create as many users as you like and attempt to log into Client-1 with one of the user's profiles</h2>
+<p>Log back into DC-1 using the jane_admin account.
+
+Search for "PowerShell ISE" in the Start menu.
+
+Right-click on PowerShell ISE and select Run as Administrator.
+
+In the top-left corner of the PowerShell ISE window, click "New Script" to open a blank script tab.
+
+Paste the contents of the provided script into the new script window.
+
+This allows you to run the script with elevated permissions directly from the PowerShell Integrated Scripting Environment. You can find the script [here](https://github.com/joshmadakor1/AD_PS/blob/master/Generate-Names-Create-Users.ps1)</p>
+
+
+<img src="https://i.imgur.com/8y5WO4M.jpeg" height="80%" width="80%">
+
+<img src="https://i.imgur.com/VGzNMmp.jpeg" height="80%" width="80%">
+
+<p>Click the green arrow (Run Script) button near the top-center of the PowerShell ISE window to execute the script.
+
+Once the script finishes running and the user accounts are created:
+
+Open Active Directory Users and Computers.
+
+Navigate to mydomain.com > _EMPLOYEES — you’ll see the newly created user accounts listed there.
+
+You can now log into Client-1 using one of these accounts.
+
+For example, try signing into Client-1 as the user base.milu with the password Password1. </p>
+
+
+<img src="https://i.imgur.com/a4ajsBu.jpeg" height="80%" width="80%">
+
+<img src="https://i.imgur.com/uwVpkd9.jpeg"   heigtht="80%" width="80%">
+
+<img src="https://i.imgur.com/bomAurD.jpeg" heigtht="80%" width="80%">
+
+<img src="https://i.imgur.com/avNjTrc.jpeg" heigtht="80%" width="80%">
+
+<img src="https://i.imgur.com/B3DOBwC.jpeg" heigtht="80%" width="80%">
+
+
+<p>Congratulations! You've successfully implemented an on-premises Active Directory environment and created user accounts — all within Azure virtual machines. Great job on setting up a fully functional domain controller and client system! </p>
+
+
 
 
